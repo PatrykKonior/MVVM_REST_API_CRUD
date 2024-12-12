@@ -70,3 +70,4 @@ C:\Users\patry\RiderProjects\Backend_API\Backend_API\obj\Debug\net9.0\refint\Bac
 C:\Users\patry\RiderProjects\Backend_API\Backend_API\obj\Debug\net9.0\Backend_API.pdb
 C:\Users\patry\RiderProjects\Backend_API\Backend_API\obj\Debug\net9.0\Backend_API.genruntimeconfig.cache
 C:\Users\patry\RiderProjects\Backend_API\Backend_API\obj\Debug\net9.0\ref\Backend_API.dll
+C:\Users\patry\RiderProjects\Backend_API\Backend_API\obj\Debug\net9.0\Backend_API.sourcelink.json

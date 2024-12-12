@@ -16,45 +16,45 @@ namespace Backend_API.Services
 
         public IEnumerable<Tasks> GetAll()
         {
-            return _context.Taskss.ToList();
+            return _context.Tasks.ToList();
         }
 
         public Tasks GetById(int id)
         {
-            return _context.Taskss.Find(id);
+            return _context.Tasks.Find(id);
         }
 
         public void Create(Tasks tasks)
         {
-            _context.Taskss.Add(tasks);
+            _context.Tasks.Add(tasks);
             _context.SaveChanges();
         }
 
         public bool Update(Tasks tasks)
         {
-            var existingTasks = _context.Taskss.Find(tasks.TasksID);
+            var existingTasks = _context.Tasks.Find(tasks.TaskID);
             if (existingTasks == null)
                 return false;
 
             existingTasks.ProjectID = tasks.ProjectID;
-            existingTasks.TasksName = tasks.TasksName;
-            existingTasks.TasksDescription = tasks.TasksDescription;
+            existingTasks.TaskName = tasks.TaskName;
+            existingTasks.TaskDescription = tasks.TaskDescription;
             existingTasks.AssignedEmployeeID = tasks.AssignedEmployeeID;
-            existingTasks.TasksStartDate = tasks.TasksStartDate;
-            existingTasks.TasksEndDate = tasks.TasksEndDate;
+            existingTasks.TaskStartDate = tasks.TaskStartDate;
+            existingTasks.TaskEndDate = tasks.TaskEndDate;
             existingTasks.EstimatedHours = tasks.EstimatedHours;
-            existingTasks.TasksStatus = tasks.TasksStatus;
+            existingTasks.TaskStatus = tasks.TaskStatus;
             _context.SaveChanges();
             return true;
         }
 
         public bool Delete(int id)
         {
-            var tasks = _context.Taskss.Find(id);
+            var tasks = _context.Tasks.Find(id);
             if (tasks == null)
                 return false;
 
-            _context.Taskss.Remove(tasks);
+            _context.Tasks.Remove(tasks);
             _context.SaveChanges();
             return true;
         }

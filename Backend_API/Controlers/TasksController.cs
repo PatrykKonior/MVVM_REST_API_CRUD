@@ -7,11 +7,11 @@ namespace Backend_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TaskssController : ControllerBase
+    public class TasksController : ControllerBase
     {
         private readonly TasksService _taskService;
 
-        public TaskssController(TasksService taskService)
+        public TasksController(TasksService taskService)
         {
             _taskService = taskService;
         }
@@ -35,13 +35,13 @@ namespace Backend_API.Controllers
         public ActionResult Create(Tasks tasks)
         {
             _taskService.Create(tasks);
-            return CreatedAtAction(nameof(GetById), new { id = tasks.TasksID }, tasks);
+            return CreatedAtAction(nameof(GetById), new { id = tasks.TaskID }, tasks);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, Tasks tasks)
         {
-            if (id != tasks.TasksID)
+            if (id != tasks.TaskID)
                 return BadRequest();
             if (_taskService.Update(tasks))
                 return NoContent();

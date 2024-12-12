@@ -10,7 +10,7 @@ namespace Backend_API.Data
         public DbSet<Client> Clients { get; set; }
         public DbSet<ClientDetail> ClientDetails { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<Tasks> Taskss { get; set; }
+        public DbSet<Tasks> Tasks { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Invoice> Invoices { get; set; }

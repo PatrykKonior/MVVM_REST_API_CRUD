@@ -22,8 +22,20 @@ namespace Backend_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddDbContext<DesignOfficeDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // CORS policy
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
 
             // Register all services here
             services.AddScoped<ClientService>();
@@ -50,7 +62,11 @@ namespace Backend_API
                 app.UseDeveloperExceptionPage();
             }
 
+            // Enable CORS
+            app.UseCors("AllowAllOrigins");
+
             app.UseRouting();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
