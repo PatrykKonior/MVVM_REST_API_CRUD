@@ -34,6 +34,28 @@ namespace Backend_API.Controllers
         [HttpPost]
         public ActionResult Create(Project project)
         {
+            if (project.ClientID <= 0 || project.ManagerID <= 0)
+            {
+                return BadRequest(new { error = "ClientID and ManagerID are required." });
+            }
+
+            var client = _projectService.GetClientById(project.ClientID);
+            if (client == null)
+            {
+                return BadRequest(new { error = "Invalid ClientID." });
+            }
+
+            var manager = _projectService.GetManagerById(project.ManagerID);
+            if (manager == null)
+            {
+                return BadRequest(new { error = "Invalid ManagerID." });
+            }
+
+            // Przypisanie obiektów nawigacyjnych na podstawie ID
+            Console.WriteLine($"ClientID: {client.ClientID}, ManagerID: {manager.EmployeeID}");
+            project.Client = client;
+            project.Manager = manager;
+
             _projectService.Create(project);
             return CreatedAtAction(nameof(GetById), new { id = project.ProjectID }, project);
         }
@@ -43,6 +65,22 @@ namespace Backend_API.Controllers
         {
             if (id != project.ProjectID)
                 return BadRequest();
+
+            var client = _projectService.GetClientById(project.ClientID);
+            if (client == null)
+            {
+                return BadRequest(new { error = "Invalid ClientID." });
+            }
+
+            var manager = _projectService.GetManagerById(project.ManagerID);
+            if (manager == null)
+            {
+                return BadRequest(new { error = "Invalid ManagerID." });
+            }
+
+            project.Client = client;
+            project.Manager = manager;
+
             if (_projectService.Update(project))
                 return NoContent();
             return NotFound();

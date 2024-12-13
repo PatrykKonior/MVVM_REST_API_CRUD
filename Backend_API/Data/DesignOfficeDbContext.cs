@@ -22,5 +22,23 @@ namespace Backend_API.Data
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<TimeLog> TimeLogs { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Konfiguracja relacji dla tabeli Projects
+            modelBuilder.Entity<Project>()
+                .HasOne(p => p.Client) // Relacja do tabeli Client
+                .WithMany()
+                .HasForeignKey(p => p.ClientID)
+                .OnDelete(DeleteBehavior.Restrict); // Brak kaskadowego usuwania
+
+            modelBuilder.Entity<Project>()
+                .HasOne(p => p.Manager) // Relacja do tabeli Employee jako Manager
+                .WithMany()
+                .HasForeignKey(p => p.ManagerID)
+                .OnDelete(DeleteBehavior.Restrict); // Brak kaskadowego usuwania
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
