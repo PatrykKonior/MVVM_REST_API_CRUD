@@ -15,20 +15,53 @@ namespace Backend_API.Services
             _context = context;
         }
 
-        public IEnumerable<Project> GetAll()
+        public IEnumerable<ProjectDTO> GetAll()
         {
             return _context.Projects
                 .Include(p => p.Client)
                 .Include(p => p.Manager)
+                .Select(p => new ProjectDTO
+                {
+                    ProjectID = p.ProjectID,
+                    ProjectName = p.ProjectName,
+                    ProjectType = p.ProjectType,
+                    ProjectStartDate = p.ProjectStartDate,
+                    ProjectEndDate = p.ProjectEndDate,
+                    ProjectBudget = p.ProjectBudget,
+                    VATRate = p.VATRate,
+                    ProjectStatus = p.ProjectStatus,
+                    ClientName = p.Client != null ? p.Client.CompanyName : null,
+                    ClientNIP = p.Client != null ? p.Client.NIP : null,
+                    ManagerFirstName = p.Manager != null ? p.Manager.FirstName : null,
+                    ManagerLastName = p.Manager != null ? p.Manager.LastName : null,
+                    ManagerPosition = p.Manager != null ? p.Manager.Position : null
+                })
                 .ToList();
         }
 
-        public Project GetById(int id)
+        public ProjectDTO GetById(int id)
         {
             return _context.Projects
                 .Include(p => p.Client)
                 .Include(p => p.Manager)
-                .FirstOrDefault(p => p.ProjectID == id);
+                .Where(p => p.ProjectID == id)
+                .Select(p => new ProjectDTO
+                {
+                    ProjectID = p.ProjectID,
+                    ProjectName = p.ProjectName,
+                    ProjectType = p.ProjectType,
+                    ProjectStartDate = p.ProjectStartDate,
+                    ProjectEndDate = p.ProjectEndDate,
+                    ProjectBudget = p.ProjectBudget,
+                    VATRate = p.VATRate,
+                    ProjectStatus = p.ProjectStatus,
+                    ClientName = p.Client != null ? p.Client.CompanyName : null,
+                    ClientNIP = p.Client != null ? p.Client.NIP : null,
+                    ManagerFirstName = p.Manager != null ? p.Manager.FirstName : null,
+                    ManagerLastName = p.Manager != null ? p.Manager.LastName : null,
+                    ManagerPosition = p.Manager != null ? p.Manager.Position : null
+                })
+                .FirstOrDefault();
         }
 
         public Client GetClientById(int clientId)

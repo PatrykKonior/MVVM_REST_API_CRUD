@@ -3,13 +3,10 @@
     public class Project
     {
         public int ProjectID { get; set; }
-
-        public int ClientID { get; set; }
-        public Client Client { get; set; } // Właściwość nawigacyjna do Client
-
-        public int ManagerID { get; set; }
-        public Employee Manager { get; set; } // Właściwość nawigacyjna do Manager (Employee)
-
+        public int? ClientID { get; set; } // Nullable
+        public Client? Client { get; set; } // Optional navigation property
+        public int? ManagerID { get; set; } // Nullable
+        public Employee? Manager { get; set; } // Optional navigation property
         public string ProjectName { get; set; }
         public string ProjectType { get; set; }
         public DateTime? ProjectStartDate { get; set; }
