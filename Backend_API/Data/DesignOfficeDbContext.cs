@@ -36,7 +36,13 @@ namespace Backend_API.Data
                 .HasOne(p => p.Manager) // Relacja do tabeli Employee jako Manager
                 .WithMany()
                 .HasForeignKey(p => p.ManagerID)
-                .OnDelete(DeleteBehavior.Restrict); // Brak kaskadowego usuwania
+                .OnDelete(DeleteBehavior.Restrict); 
+            
+            modelBuilder.Entity<Sale>()
+                .HasOne(s => s.Client)
+                .WithMany()
+                .HasForeignKey(s => s.ClientID)
+                .OnDelete(DeleteBehavior.Restrict); 
 
             base.OnModelCreating(modelBuilder);
         }
