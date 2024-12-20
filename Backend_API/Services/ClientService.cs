@@ -16,7 +16,16 @@ namespace Backend_API.Services
 
         public IEnumerable<Client> GetAll()
         {
-            return _context.Clients.ToList();
+            return _context.Clients.Select(client => new Client
+            {
+                ClientID = client.ClientID,
+                CompanyName = client.CompanyName ?? string.Empty,
+                NIP = client.NIP ?? string.Empty,
+                Regon = client.Regon ?? string.Empty,
+                PhoneNumber = client.PhoneNumber ?? string.Empty,
+                Email = client.Email ?? string.Empty,
+                ContactPersonName = client.ContactPersonName ?? string.Empty
+            }).ToList();
         }
 
         public Client GetById(int id)
@@ -39,6 +48,9 @@ namespace Backend_API.Services
             existingClient.CompanyName = client.CompanyName;
             existingClient.NIP = client.NIP;
             existingClient.Regon = client.Regon;
+            existingClient.PhoneNumber = client.PhoneNumber; 
+            existingClient.Email = client.Email;             
+            existingClient.ContactPersonName = client.ContactPersonName; 
             _context.SaveChanges();
             return true;
         }

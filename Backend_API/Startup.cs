@@ -36,6 +36,17 @@ namespace Backend_API
                            .AllowAnyHeader();
                 });
             });
+            
+            //swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Backend API",
+                    Version = "v1",
+                    Description = "API Documentation for Backend System"
+                });
+            });
 
             // Register all services here
             services.AddScoped<ClientService>();
@@ -60,6 +71,14 @@ namespace Backend_API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                // Enable Swagger in Development
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Backend API v1");
+                    c.RoutePrefix = "swagger"; // Swagger UI will be at root URL
+                });
             }
 
             // Enable CORS
