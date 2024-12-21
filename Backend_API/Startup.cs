@@ -56,7 +56,7 @@ namespace Backend_API
             services.AddScoped<EmployeeService>();
             services.AddScoped<DepartmentService>();
             services.AddScoped<InvoiceService>();
-            services.AddScoped<PaymentService>();
+            services.AddScoped<PaymentsService>();
             services.AddScoped<MaterialService>();
             services.AddScoped<ProjectMaterialService>();
             services.AddScoped<SalesService>();

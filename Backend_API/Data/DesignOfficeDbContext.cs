@@ -42,7 +42,12 @@ namespace Backend_API.Data
                 .HasOne(s => s.Client)
                 .WithMany()
                 .HasForeignKey(s => s.ClientID)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.Invoice) 
+                .WithMany()
+                .HasForeignKey(p => p.InvoiceID) 
+                .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(modelBuilder);
         }

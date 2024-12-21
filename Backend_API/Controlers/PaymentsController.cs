@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Backend_API.Models.Entities;
+﻿using Backend_API.Models.Entities;
 using Backend_API.Services;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Backend_API.Controllers
 {
@@ -9,51 +8,49 @@ namespace Backend_API.Controllers
     [Route("api/[controller]")]
     public class PaymentsController : ControllerBase
     {
-        private readonly PaymentService _paymentService;
+        private readonly PaymentsService _paymentsService;
 
-        public PaymentsController(PaymentService paymentService)
+        public PaymentsController(PaymentsService paymentsService)
         {
-            _paymentService = paymentService;
+            _paymentsService = paymentsService;
         }
 
         [HttpGet]
-        public IEnumerable<Payment> GetAll()
+        public ActionResult<IEnumerable<PaymentDTO>> GetAll()
         {
-            return _paymentService.GetAll();
+            var payments = _paymentsService.GetAll();
+            return Ok(payments);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Payment> GetById(int id)
+        public ActionResult<PaymentDTO> GetById(int id)
         {
-            var payment = _paymentService.GetById(id);
-            if (payment == null)
-                return NotFound();
-            return payment;
+            var payment = _paymentsService.GetById(id);
+            if (payment == null) return NotFound();
+            return Ok(payment);
         }
 
         [HttpPost]
         public ActionResult Create(Payment payment)
         {
-            _paymentService.Create(payment);
+            _paymentsService.Create(payment);
             return CreatedAtAction(nameof(GetById), new { id = payment.PaymentID }, payment);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, Payment payment)
         {
-            if (id != payment.PaymentID)
-                return BadRequest();
-            if (_paymentService.Update(payment))
-                return NoContent();
-            return NotFound();
+            if (id != payment.PaymentID) return BadRequest();
+
+            if (!_paymentsService.Update(payment)) return NotFound();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            if (_paymentService.Delete(id))
-                return NoContent();
-            return NotFound();
+            if (!_paymentsService.Delete(id)) return NotFound();
+            return NoContent();
         }
     }
 }
