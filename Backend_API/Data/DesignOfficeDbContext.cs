@@ -22,6 +22,7 @@ namespace Backend_API.Data
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<TimeLog> TimeLogs { get; set; }
+        public DbSet<ProjectAssignment> ProjectAssignments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -63,6 +63,27 @@ namespace Backend_API.Services
                 })
                 .FirstOrDefault();
         }
+        
+        public IEnumerable<EmployeeDTO> GetEmployeesForProject(int projectId)
+        {
+            var employees = _context.ProjectAssignments
+                .Where(pa => pa.ProjectID == projectId)
+                .Select(pa => new EmployeeDTO
+                {
+                    EmployeeID = pa.Employee.EmployeeID,
+                    FirstName = pa.Employee.FirstName,
+                    LastName = pa.Employee.LastName,
+                    Position = pa.Employee.Position,
+                    PhoneNumber = pa.Employee.PhoneNumber,
+                    Email = pa.Employee.Email,
+                    HireDate = pa.Employee.HireDate,
+                    Salary = pa.Employee.Salary,
+                    ProjectName = pa.Project.ProjectName // Pobierz nazwę projektu
+                })
+                .ToList();
+
+            return employees;
+        }
 
         public Client GetClientById(int clientId)
         {

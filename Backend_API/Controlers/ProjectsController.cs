@@ -31,7 +31,18 @@ namespace Backend_API.Controllers
                 return NotFound();
             return Ok(project);
         }
+        
+        [HttpGet("{id}/employees")]
+        public ActionResult<IEnumerable<Employee>> GetEmployeesForProject(int id)
+        {
+            var employees = _projectService.GetEmployeesForProject(id);
 
+            if (!employees.Any())
+                return NotFound(new { Message = "No employees found for this project." });
+
+            return Ok(employees);
+        }
+        
         [HttpPost]
         public ActionResult Create(Project project)
         {

@@ -10,5 +10,8 @@
         public string Email { get; set; }
         public DateTime? HireDate { get; set; }
         public decimal? Salary { get; set; }
+        
+        // Dodano właściwość nawigacyjną
+        public ICollection<Project> Projects { get; set; }
     }
 }

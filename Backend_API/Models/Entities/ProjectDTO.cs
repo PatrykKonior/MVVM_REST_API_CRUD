@@ -15,4 +15,5 @@ public class ProjectDTO
     public string ManagerFirstName { get; set; }
     public string ManagerLastName { get; set; }
     public string ManagerPosition { get; set; }
+    public string EmployeeName { get; set; }
 }

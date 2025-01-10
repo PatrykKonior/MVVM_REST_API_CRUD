@@ -14,5 +14,8 @@
         public decimal? ProjectBudget { get; set; }
         public decimal? VATRate { get; set; }
         public string ProjectStatus { get; set; }
+        
+        // Dodano właściwość nawigacyjną
+        public ICollection<Employee> Employees { get; set; }
     }
 }

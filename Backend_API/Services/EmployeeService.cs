@@ -29,6 +29,27 @@ namespace Backend_API.Services
             _context.Employees.Add(employee);
             _context.SaveChanges();
         }
+        
+        public IEnumerable<ProjectDTO> GetProjectsForEmployee(int employeeId)
+        {
+            var projects = _context.ProjectAssignments
+                .Where(pa => pa.EmployeeID == employeeId)
+                .Select(pa => new ProjectDTO
+                {
+                    ProjectID = pa.Project.ProjectID,
+                    ProjectName = pa.Project.ProjectName,
+                    ProjectType = pa.Project.ProjectType,
+                    ProjectStartDate = pa.Project.ProjectStartDate,
+                    ProjectEndDate = pa.Project.ProjectEndDate,
+                    ProjectBudget = pa.Project.ProjectBudget,
+                    VATRate = pa.Project.VATRate,
+                    ProjectStatus = pa.Project.ProjectStatus,
+                    EmployeeName = pa.Employee.FirstName + " " + pa.Employee.LastName // Imię i nazwisko pracownika
+                })
+                .ToList();
+
+            return projects;
+        }
 
         public bool Update(Employee employee)
         {
