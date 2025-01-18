@@ -16,6 +16,6 @@
         public string ProjectStatus { get; set; }
         
         // Dodano właściwość nawigacyjną
-        public ICollection<Employee> Employees { get; set; }
+        public ICollection<Employee>? Employees { get; set; }
     }
 }

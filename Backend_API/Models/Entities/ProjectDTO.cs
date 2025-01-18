@@ -10,10 +10,10 @@ public class ProjectDTO
     public decimal? ProjectBudget { get; set; }
     public decimal? VATRate { get; set; }
     public string ProjectStatus { get; set; }
-    public string ClientName { get; set; } 
-    public string ClientNIP { get; set; } 
-    public string ManagerFirstName { get; set; }
-    public string ManagerLastName { get; set; }
-    public string ManagerPosition { get; set; }
-    public string EmployeeName { get; set; }
+    public string? ClientName { get; set; } 
+    public string? ClientNIP { get; set; } 
+    public string? ManagerFirstName { get; set; }
+    public string? ManagerLastName { get; set; }
+    public string? ManagerPosition { get; set; }
+    public string? EmployeeName { get; set; }
 }

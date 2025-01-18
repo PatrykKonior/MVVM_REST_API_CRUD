@@ -12,6 +12,6 @@
         public decimal? Salary { get; set; }
         
         // Dodano właściwość nawigacyjną
-        public ICollection<Project> Projects { get; set; }
+        public ICollection<Project>? Projects { get; set; }
     }
 }

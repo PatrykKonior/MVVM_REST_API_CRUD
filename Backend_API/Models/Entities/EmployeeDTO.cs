@@ -10,5 +10,5 @@ public class EmployeeDTO
     public string Email { get; set; }
     public DateTime? HireDate { get; set; }
     public decimal? Salary { get; set; }
-    public string ProjectName { get; set; } // Dodane pole na nazwę projektu
+    public string? ProjectName { get; set; } // Dodane pole na nazwę projektu
 }
